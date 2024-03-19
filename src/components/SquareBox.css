@@ -1,0 +1,11 @@
+.square-box {
+  height: 0;
+  width: 5%;
+  padding-bottom: 5%;
+  background-color: blue;
+  float: left;
+  font-size: 30px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+}
