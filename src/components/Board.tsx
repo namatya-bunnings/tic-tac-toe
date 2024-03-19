@@ -6,14 +6,16 @@ const Board = () => {
   const [squareValues, setSquareValues] = React.useState<string[] | null[]>(
     Array(9).fill(null)
   );
+  const [isXFirst, setIsXFirst] = React.useState<boolean>(true);
 
   const handleClick = (i: number) => {
     const newArrayValue = [...squareValues];
     if (newArrayValue[i]) {
       return;
     }
-    newArrayValue[i] = "X";
+    isXFirst ? (newArrayValue[i] = "X") : (newArrayValue[i] = "O");
     setSquareValues(newArrayValue as string[] | null[]);
+    setIsXFirst(!isXFirst);
   };
 
   return (
