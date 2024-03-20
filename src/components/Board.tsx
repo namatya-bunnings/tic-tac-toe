@@ -1,26 +1,30 @@
 import React from "react";
 import SquareBox from "./SquareBox";
 import "./Board.css";
+import { getWinner } from "../utils/getWinner";
 
 const Board = () => {
-  const [squareValues, setSquareValues] = React.useState<string[] | null[]>(
+  const [squareValues, setSquareValues] = React.useState<(string | null)[]>(
     Array(9).fill(null)
   );
   const [isXFirst, setIsXFirst] = React.useState<boolean>(true);
 
+  const gameWinner = getWinner({ squareValues });
+
   const handleClick = (i: number) => {
-    const newArrayValue = [...squareValues];
-    if (newArrayValue[i]) {
+    const clonedSquareValues = [...squareValues];
+    if (clonedSquareValues[i] || gameWinner) {
       return;
     }
-    isXFirst ? (newArrayValue[i] = "X") : (newArrayValue[i] = "O");
-    setSquareValues(newArrayValue as string[] | null[]);
+    isXFirst ? (clonedSquareValues[i] = "X") : (clonedSquareValues[i] = "O");
+    setSquareValues(clonedSquareValues as (string | null)[]);
     setIsXFirst(!isXFirst);
   };
 
   return (
     <div className="container">
       <h2>Tic-Tac-Toe</h2>
+      {gameWinner && <p>Winner is {gameWinner}</p>}
       <div className="row">
         <SquareBox value={squareValues[0]} handleClick={() => handleClick(0)} />
         <SquareBox value={squareValues[1]} handleClick={() => handleClick(1)} />
