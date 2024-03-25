@@ -1,4 +1,4 @@
-import { getWinner } from "../utils/getWinner";
+import { getWinner } from "./getWinner";
 
 describe("get winner", () => {
   it("returns null when all the squares on the board are empty", () => {
